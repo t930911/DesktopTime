@@ -1,10 +1,12 @@
-#ifndef WIDGET_H
+﻿#ifndef WIDGET_H
 #define WIDGET_H
 
 #include <QWidget>
 #include <QMouseEvent>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QAction>
+#include <QPixmap>
 #include <QPoint>
 #include <QTimer>
 
@@ -25,9 +27,17 @@ public:
     void mousePressEvent(QMouseEvent *event) override;
 
     void paintEvent(QPaintEvent *event) override;
+
+    QPixmap createTextIcon(const QString &text, const QSize &size);
+
 public slots:
     void updateTime();
 
+    void onTopButton();
+
+    void onExitButton();
+
+    void onEnMoveButton();
 private:
     Ui::Widget *ui;
     QPoint m_dragPos;
@@ -35,6 +45,11 @@ private:
     QString m_time;
     QString m_date;
     QString m_week;
+    QAction *m_topButton;
+    QAction *m_exitButton;
+    QAction *m_enMoveButton;
+    bool m_isTop;
+    bool m_isEnableMove;
 };
 
 #endif // WIDGET_H
